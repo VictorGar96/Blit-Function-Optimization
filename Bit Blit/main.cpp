@@ -26,18 +26,20 @@ void Blit
     unsigned source_height
 )
 {
+    unsigned delta = target_width - source_width;
+    target += target_width * target_y + target_x;
+    
     // Recorremos el alto
     for(int y = 0; y < source_height; ++y)
     {
         // Recorremos el ancho
-        for(int x = 0; x < source_width; ++x)
+        for(int x = 0; x < source_width; ++x, ++source, ++target)
         {
-            //
             unsigned target_offset = (target_y + y) * target_width + (target_x + x);
-            unsigned source_offset = y * source_width + x;
             
-            target[target_offset] = source[source_offset];
+            *target = *source;
         }
+        target += delta;
     }
 }
 
