@@ -28,17 +28,16 @@ void Blit
 {
     unsigned delta = target_width - source_width;
     target += target_width * target_y + target_x;
+    Rgb565* source_end = source;
     
     // Recorremos el alto
     while(source_height--) // Sale del bucle en caso de que source_height sea == 0 (false)
     {
+        source_end += source_width;
         // Recorremos el ancho
-        for(int x = 0; x < source_width; ++x, ++source, ++target)
+        while(source < source_end)
         {
-            // Variable y will be removed
-            unsigned target_offset = (target_y + y) * target_width + (target_x + x);
-            
-            *target = *source;
+            *target++ = *source++;
         }
         target += delta;
     }
