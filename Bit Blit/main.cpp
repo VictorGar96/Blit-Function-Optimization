@@ -37,7 +37,16 @@ void Blit
         // Recorremos el ancho
         while(source < source_end)
         {
-            *target++ = *source++;
+            //*target++ = *source++;
+            __asm
+            {
+                mov edi, [target]
+                mov esi, [source]
+                mov ax,  [esi]
+                mov [edi], ax
+                inc dword ptr [target]
+                inc dword ptr [source]
+            }
         }
         target += delta;
     }
