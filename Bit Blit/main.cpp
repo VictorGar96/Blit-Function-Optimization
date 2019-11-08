@@ -30,11 +30,12 @@ void Blit
     target += target_width * target_y + target_x;
     
     // Recorremos el alto
-    for(int y = 0; y < source_height; ++y)
+    while(source_height--) // Sale del bucle en caso de que source_height sea == 0 (false)
     {
         // Recorremos el ancho
         for(int x = 0; x < source_width; ++x, ++source, ++target)
         {
+            // Variable y will be removed
             unsigned target_offset = (target_y + y) * target_width + (target_x + x);
             
             *target = *source;
